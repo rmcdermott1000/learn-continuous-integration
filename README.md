@@ -43,7 +43,8 @@ First setup your machine or your teammate's machine to be the self hosted runner
 
 Answer the following questions:
 
-NOTE: running scripts was disabled on my machine so im going to do it on ubuntu latest. I attached an aimge for proof.
+NOTE: running scripts was disabled on my machine so im going to do it on ubuntu latest. I attached an image for proof.
+
 
 1. What does the __runs-on__ string  
     The runs on string describes the VM or container the github action will be running on, you can create your own runner using github that points to your machine but you can also use an image and run it on the cloud.

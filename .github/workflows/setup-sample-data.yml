@@ -5,10 +5,20 @@ on:
     branches:
       - deploy
 
+  pull_request:
+    branches:
+      - deploy
+
 jobs:
   setup-sample-data:
     name: Setup Sample Data on Deploy
     runs-on: ubuntu-latest
+
+    services:
+      mmongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
 
     steps:
       # Step 1: Check out the repository
@@ -25,12 +35,14 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      # Step 4: Remove existing database
-      - name: Remove Database
-        run: |
-          npx ts-node remove_db.ts
-
       # Step 5: Insert sample data into the database
       - name: Insert Sample Data
         run: |
-          npx ts-node insert_sample_db.ts
+          npx ts-node insert_sample_db.ts mongodb://127.0.0.1:27017/fake_so
+
+      # Step 4: Remove existing database
+      - name: Remove Database
+        run: |
+          npx ts-node remove_db.ts mongodb://127.0.0.1:27017/fake_so
+
+      
