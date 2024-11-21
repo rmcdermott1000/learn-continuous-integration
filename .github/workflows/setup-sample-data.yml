@@ -1,0 +1,42 @@
+name: Setup Sample Data
+
+on:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  setup-sample-data:
+    name: Setup Sample Data on Deploy
+    runs-on: ubuntu-latest
+
+    services:
+      mmongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Specify the version of Node.js you are using
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 4: Remove existing database
+      - name: Remove Database
+        run: |
+          npx ts-node remove_db.ts mongodb://127.0.0.1:27017/fake_so
+
+      # Step 5: Insert sample data into the database
+      - name: Insert Sample Data
+        run: |
+          npx ts-node insert_sample_db.ts mongodb://127.0.0.1:27017/fake_so

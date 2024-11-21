@@ -43,10 +43,15 @@ First setup your machine or your teammate's machine to be the self hosted runner
 
 Answer the following questions:
 
-1. What does the __runs-on__ string  
-2. In `main.yml`, on which branch do the jest tests run when a push to main branch is made?
-3. In `main.yml`, on which branch do the jest tests run when a pull request is submitted to the deploy branch?
+NOTE: running scripts was disabled on my machine so im going to do it on ubuntu latest. I attached an image for proof.
 
+
+1. What does the __runs-on__ string  
+    The runs on string describes the VM or container the github action will be running on, you can create your own runner using github that points to your machine but you can also use an image and run it on the cloud.
+2. In `main.yml`, on which branch do the jest tests run when a push to main branch is made?
+    The Jest tests run on the main branch when a push event is triggered for the main branch.
+3. In `main.yml`, on which branch do the jest tests run when a pull request is submitted to the deploy branch?
+    The Jest tests run on the branch being merged into deploy when a pull request targets the deploy branch. 
 Next, create a new workflow yml file that captures the following continuous integration requirement:
 
 - When new changes are pushed to the deploy branch, the sample data should be setup using the scripts in `remove_db.ts` and `insert_sample_db.ts`.
