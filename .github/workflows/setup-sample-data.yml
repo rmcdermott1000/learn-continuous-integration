@@ -5,6 +5,10 @@ on:
     branches:
       - deploy
 
+  pull_request:
+    branches:
+      - deploy
+
 jobs:
   setup-sample-data:
     name: Setup Sample Data on Deploy
