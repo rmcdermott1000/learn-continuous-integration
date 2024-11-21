@@ -5,10 +5,6 @@ on:
     branches:
       - deploy
 
-  pull_request:
-    branches:
-      - deploy
-
 jobs:
   setup-sample-data:
     name: Setup Sample Data on Deploy
@@ -32,9 +28,9 @@ jobs:
       # Step 4: Remove existing database
       - name: Remove Database
         run: |
-          npx ts-node scripts/remove_db.ts
+          npx ts-node remove_db.ts
 
       # Step 5: Insert sample data into the database
       - name: Insert Sample Data
         run: |
-          npx ts-node scripts/insert_sample_db.ts
+          npx ts-node insert_sample_db.ts
