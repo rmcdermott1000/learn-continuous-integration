@@ -38,11 +38,11 @@ jobs:
       # Step 5: Insert sample data into the database
       - name: Insert Sample Data
         run: |
-          npx ts-node insert_sample_db.ts mongodb://127.0.0.1:27017/fake_so
+          npm run remove-sample-data -- "mongodb://127.0.0.1:27017/fake_so"
 
       # Step 4: Remove existing database
       - name: Remove Database
         run: |
-          npx ts-node remove_db.ts mongodb://127.0.0.1:27017/fake_so
+          npm run insert-sample-data -- "mongodb://127.0.0.1:27017/fake_so"
 
       
